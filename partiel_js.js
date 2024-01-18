@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const kitchenOrdersList = document.getElementById('kitchenOrders');
 
     const recipes = [];
-    const kitchenOrders = [];
+    let kitchenOrders = [];
 
     addRecipeBtn.addEventListener('click', function () {
         addRecipe();
@@ -116,9 +116,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function deleteRecipe(recipeId) {
         const recipeIndex = recipes.findIndex(recipe => recipe.id === recipeId);
-        const orderIndex = kitchenOrders.findIndex(order => order.id === recipeId);
         recipes.splice(recipeIndex, 1);
-        kitchenOrders.splice(orderIndex, 1);
+        kitchenOrders = kitchenOrders.filter(order => order.recipe.id !== recipeId);
         renderRecipes();
         renderKitchenOrders();
     }
